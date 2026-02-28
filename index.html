@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turning Point Serbia</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #cce7ff;
+            background-image: repeating-linear-gradient(
+                45deg,
+                rgba(255,255,255,0.05),
+                rgba(255,255,255,0.05) 10px,
+                transparent 10px,
+                transparent 20px
+            );
+        }
+
+        /* Title */
+        .title-container {
+            width: 100%;
+            padding: 50px 0 20px 0;
+            text-align: center;
+            background: linear-gradient(to right, #FF0000 0%, #FF0000 33%, #0000FF 33%, #0000FF 66%, #FFFFFF 66%, #FFFFFF 100%);
+            animation: fadeIn 2s ease-in-out forwards;
+            opacity: 0;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 4rem;
+            color: #000000;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            -webkit-text-stroke: 1px white;
+            text-stroke: 1px white;
+        }
+
+        .title-sub {
+            font-size: 1.2rem;
+            color: #000000;
+            margin-top: 10px;
+            font-weight: normal;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(-20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Map + paragraph container */
+        .map-paragraph-container {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            width: 90%;
+            margin: 50px auto;
+            flex-wrap: wrap;
+        }
+
+        .map-image {
+            width: 40%;
+            max-width: 400px;
+            border-radius: 10px;
+        }
+
+        .intro-paragraph {
+            flex: 1;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Gallery */
+        .gallery-title {
+            text-align: center;
+            font-size: 2rem;
+            margin: 40px 0 20px 0;
+            color: #000000;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            width: 80%;
+            margin: 0 auto 50px auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            object-fit: cover;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+        }
+
+        /* Dropdown text */
+        .dropdown-text {
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 10px;
+            background-color: rgba(255,255,255,0.9);
+            border-radius: 5px;
+            margin-top: 5px;
+            text-align: center;
+            font-size: 0.9rem;
+            transition: max-height 0.5s ease, padding 0.5s ease;
+        }
+
+        .dropdown-text.open {
+            max-height: 300px;
+            padding: 10px;
+        }
+
+        /* Hover dropdown on desktop */
+        @media (hover: hover) {
+            .gallery-item:hover .dropdown-text {
+                max-height: 300px;
+                padding: 10px;
+            }
+        }
+
+        /* Problems Section */
+        .problems-section {
+            width: 90%;
+            margin: 50px auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 30px;
+        }
+
+        .problem-item {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            margin-bottom: 40px;
+        }
+
+        .problem-image {
+            width: 40%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            object-fit: cover;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .problem-image:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+        }
+
+        .problem-text {
+            flex: 1;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Fade-in scroll animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .gallery {
+                grid-template-columns: 1fr;
+                width: 90%;
+            }
+
+            h1 {
+                font-size: 3rem;
+            }
+
+            .gallery-title {
+                font-size: 1.7rem;
+            }
+
+            .map-paragraph-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .map-image {
+                width: 60%;
+            }
+
+            .intro-paragraph {
+                width: 90%;
+            }
+
+            .problem-item {
+                flex-direction: column;
+            }
+
+            .problem-image {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Title -->
+    <div class="title-container fade-in">
+        <h1>Turning Point Serbia</h1>
+        <div class="title-sub">By Daniel Andric</div>
+    </div>
+
+    <!-- Map + paragraph -->
+    <div class="map-paragraph-container fade-in">
+        <img src="images/mapofserbia.jpg" alt="Map of Serbia" class="map-image">
+        <div class="intro-paragraph">
+            As are many other nations around the globe, Serbia finds itself at a crossroad : to crumble at the hands of corrupt politicians, western funded NGOs, communists, avaricious citizens who would trade their country for a paycheck, Islam, and many other very real threats, or to unite as a nation, build our country brick by brick, leave the excuses at the door and create a STRONG, UNIFIED, and POWERFUL Serbia. <br><br>
+            I am the founder of Turning Point Serbia, Daniel Andric. I was cut deep by the loss of American politician and patriot Charlie Kirk, but I do not intend on letting evil win. I am of Serbian descent and I am genuinely sickened, ashamed and angry at the state that our country has fallen into. I am taking it upon myself to do what I can, as should you. Weather I am able to reform the Serbian empire, or feed a family in Kosovo for a week, I will not stop fighting. Victories, big or small, massive or microscopic will help me sleep at night. <br><br>
+            Please explore my website below to find out how YOU can help. How YOU can be on the right side of history, and how YOU can make a difference in the world.
+        </div>
+    </div>
+
+    <!-- Gallery section title -->
+    <div class="gallery-title fade-in">Get to know Serbia</div>
+
+    <!-- Gallery -->
+    <div class="gallery">
+        <div class="gallery-item fade-in">
+            <img src="images/danica.png" alt="Danica" onclick="toggleDropdown(this)">
+            <div class="dropdown-text">
+                Serbian people in Podgorica, defending the Serbian Orthodox Church. Serbian people in Montenegro continue to fight for their identity, they face many challenges but will prevail in the end with faith in God.
+            </div>
+        </div>
+        <div class="gallery-item fade-in">
+            <img src="images/golubac.jpeg" alt="Golubac" onclick="toggleDropdown(this)">
+            <div class="dropdown-text">
+                A medieval fortress in the eastern part of Serbia. A beautiful place to visit, and to learn about the history of our land.
+            </div>
+        </div>
+        <div class="gallery-item fade-in">
+            <img src="images/folklore.jpg" alt="Folklore" onclick="toggleDropdown(this)">
+            <div class="dropdown-text">
+                Serbian women dancing traditional folklore. It is imperative to keep traditions alive, this is how we distinguish ourselves amongst others.
+            </div>
+        </div>
+        <div class="gallery-item fade-in">
+            <img src="images/beograd.jpg" alt="Beograd" onclick="toggleDropdown(this)">
+            <div class="dropdown-text">
+                Serbia's beating heart: Belgrade. A city filled with HOPE. Hram Svetog Save is our ornate church where Serbian people can practice Orthodox Christianity.
+            </div>
+        </div>
+        <div class="gallery-item fade-in">
+            <img src="images/cerskimars.jpg" alt="Cerski Mars" onclick="toggleDropdown(this)">
+            <div class="dropdown-text">
+                Cerski Mars, a march held every year in August. Starting in Sabac, marching all the way through 40 degree weather to the top of mount Cer, where Serbian people won the first battle of World War One. Serbian people are to be PROUD of our victories.
+            </div>
+        </div>
+        <div class="gallery-item fade-in">
+            <img src="images/flag.jpg" alt="Flag" onclick="toggleDropdown(this)">
+            <div class="dropdown-text">
+                Our gorgeous Serbian flag. This flag not only represents our country, but our people. Our people who have fought and died for our nation. Our people who endured endless hardships for a belief of a strong Serbia. Do not let your ancestors die in vain.
+            </div>
+        </div>
+        <div class="gallery-item fade-in">
+            <img src="images/monastery.jpg" alt="Monastery" onclick="toggleDropdown(this)">
+            <div class="dropdown-text">
+                Visoki Decani is one of many Serbian monasteries across the country. Our monasteries are a staple of our country. They are to be built, maintained and defended.
+            </div>
+        </div>
+        <div class="gallery-item fade-in">
+            <img src="images/hills.jpg" alt="Hills" onclick="toggleDropdown(this)">
+            <div class="dropdown-text">
+                Serbia is a country with many varieties of breathtaking scenery. This is Serbian land. It belongs to the Serbian people.
+            </div>
+        </div>
+    </div>
+
+    <!-- Problems Section -->
+    <div class="problems-section">
+        <h2 class="section-title fade-in">What are the problems, and how do we fix it?</h2>
+
+        <!-- Problem 1 -->
+        <div class="problem-item fade-in">
+            <img src="images/muslim.jpg" alt="Immigration issue" class="problem-image">
+            <div class="problem-text">
+                <strong>Immigration:</strong> Does this family look English to you? No? Well, that's because they're not. But they live in the UK. In fact, most people in London look like this. <br><br>
+                If I need to explain to you why this is not healthy, then you've most likely been brainwashed by some left wing garbage. The fix for this is not simple, but fixing a country is not a simple task. <br><br>
+                The important thing to remember is that while it is difficult to fix, we must. The immigration problem is affecting many countries worldwide. Without getting into the politics, it is clearly not good. Serbs need to get involved. Make it clear that we don't want an onslaught of 3rd worlders invading us. Over time, if enough people are involved, on multiple levels, we can have strong borders.
+            </div>
+        </div>
+
+        <!-- Problem 2 -->
+        <div class="problem-item fade-in">
+            <img src="images/birth.jpg" alt="Birth Rate issue" class="problem-image">
+            <div class="problem-text">
+                <strong>Birth Rate:</strong> This one is hard to hear, but it is literally essential to understand for the survival of our people. Our birth rate is under 2.0. That is simply unacceptable. <br><br>
+                The government has the power to ban or tax contraception, which is something I plan to do on day one if I am ever in the position to. <br><br>
+                There is nothing more fulfilling and beautiful in life than a family of your own. No amount of money, cars, mansions, or gold will ever help when you are a 60 year old cat lady. Forget that crazy corporate career, forget travelling your world till you're 30, forget saving your money to spend it on vaping, drinking and partying. Invest your money, grow up, be an adult for a change and have kids.
+            </div>
+        </div>
+
+        <!-- Problem 3 -->
+        <div class="problem-item fade-in">
+            <img src="images/economy.jpg" alt="Economy issue" class="problem-image">
+            <div class="problem-text">
+                <strong>Economy:</strong> I have had many arguments with Serbs about the Serbian economy. I am able to summarize it: they want handouts. <br><br>
+                Whether people are reminiscing about the FAILED state of Yugoslavia, or simply just lazy, everyone I speak to seems to tell me the same story. Something along the lines of "there is no money out there", or "Serbia is corrupt". All I hear is BS. <br><br>
+                Singapore is the size of Belgrade geographically and they're kicking Serbia's ass economically - so it's not a land mass issue. China was far worse off than today's Serbia in the 1970's and now they're arguably the most powerful country in the world. What is Serbia's excuse? Get off your ass - start a business, make money, invest, build the economy. Malo po malo.
+            </div>
+        </div>
+
+        <!-- Problem 4 -->
+        <div class="problem-item fade-in">
+            <img src="images/fundraising.jpg" alt="Fundraising issue" class="problem-image">
+            <div class="problem-text">
+                <strong>Fundraising:</strong> Luckily, Serbia has many very reputable non profit organizations. This is how YOU can help TODAY. More about this below.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle dropdowns
+        function toggleDropdown(img) {
+            const allTexts = document.querySelectorAll('.dropdown-text');
+            const currentText = img.nextElementSibling;
+
+            allTexts.forEach(text => {
+                if(text !== currentText) text.classList.remove('open');
+            });
+
+            currentText.classList.toggle('open');
+        }
+
+        // Scroll fade-in animation
+        const faders = document.querySelectorAll('.fade-in');
+
+        const appearOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const appearOnScroll = new IntersectionObserver(function(entries, observer){
+            entries.forEach(entry => {
+                if(entry.isIntersecting){
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // animate only once
+                }
+            });
+        }, appearOptions);
+
+        faders.forEach(fader => {
+            appearOnScroll.observe(fader);
+        });
+    </script>
+	<!-- Your Role Section -->
+<div class="your-role-section">
+    <h2>Your Role</h2>
+    <div class="role-container">
+        <!-- Everyone for Kosovo -->
+        <div class="role-tab">
+            <img src="images/svizakosmet.png" alt="Everyone for Kosovo">
+            <div class="role-title">Everyone for Kosovo</div>
+            <div class="role-dropdown">
+                <p>A Serbian community organization supporting families in Kosovo.</p>
+                <a href="https://www.facebook.com/svizakosmet" target="_blank">Visit Everyone for Kosovo</a>
+            </div>
+        </div>
+
+        <!-- Serbs for Serbs -->
+        <div class="role-tab">
+            <img src="images/srbizasrbe.png" alt="Serbs for Serbs">
+            <div class="role-title">Serbs for Serbs</div>
+            <div class="role-dropdown">
+                <p>Helps Serbian communities in need across the Balkans.</p>
+                <a href="https://www.srbizasrbe.org/" target="_blank">Visit Serbs for Serbs</a>
+            </div>
+        </div>
+
+        <!-- Novak Djokovic Foundation -->
+        <div class="role-tab">
+            <img src="images/ndf.png" alt="Novak Djokovic Foundation">
+            <div class="role-title">Novak Djokovic Foundation</div>
+            <div class="role-dropdown">
+                <p>Focuses on childhood education and development in Serbia.</p>
+                <a href="https://novakdjokovicfoundation.org/" target="_blank">Visit Novak Djokovic Foundation</a>
+            </div>
+        </div>
+
+        <!-- Going to Church -->
+        <div class="role-tab">
+            <img src="images/church.jpg" alt="Going to Church">
+            <div class="role-title">Going to Church</div>
+            <div class="role-dropdown">
+                <p>Go to church. Get involved with the church community and network with people. Make connections that might help you in the future and find a wife.</p>
+            </div>
+        </div>
+
+        <!-- Politics -->
+        <div class="role-tab">
+            <img src="images/justin.jpg" alt="Politics">
+            <div class="role-title">Politics</div>
+            <div class="role-dropdown">
+                <p>I know - Justin, ew. Politics is a man’s sport. It isn’t just about arguing at the dinner table and making people feel dumb. With politics, you can change the world. So get involved with your local politicians. It is easier than you think to get involved.</p>
+            </div>
+        </div>
+
+        <!-- Education -->
+        <div class="role-tab">
+            <img src="images/books.jpg" alt="Education">
+            <div class="role-title">Education</div>
+            <div class="role-dropdown">
+                <p>Educate yourself. I don't mean going to some left wing school and getting BS credentials in "gender studies". I mean read books on the history of Kosovo written by reputable people, learn about NGOs, learn about playing the game to your advantage. Educate yourself so you can improve Serbia.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bold statement at the bottom -->
+    <p style="margin-top:30px; font-weight:bold; font-size:1.2rem;">The time to fight is now.</p>
+</div>
+
+<style>
+/* Your Role Section CSS */
+.your-role-section {
+    width: 90%;
+    margin: 50px auto;
+    text-align: center;
+}
+
+.your-role-section h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #000;
+}
+
+/* Grid layout with 3 per row */
+.role-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+    gap: 20px 30px;
+}
+
+.role-tab {
+    width: 200px;
+    cursor: pointer;
+    border-radius: 10px;
+    overflow: visible;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: #fff;
+}
+
+.role-tab:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+}
+
+.role-tab img {
+    width: 100%;
+    display: block;
+    border-bottom: 1px solid #ccc;
+    border-radius: 10px 10px 0 0;
+}
+
+.role-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+    background-color: #f0f0f0;
+}
+
+.role-dropdown {
+    max-height: 0;
+    overflow: hidden;
+    text-align: center;
+    transition: max-height 0.5s ease, padding 0.5s ease;
+    padding: 0 10px;
+    background-color: #fafafa;
+    border-radius: 0 0 10px 10px;
+}
+
+.role-dropdown p {
+    margin: 10px 0 5px 0;
+    font-size: 0.9rem;
+}
+
+.role-tab.open .role-dropdown {
+    max-height: 400px;
+    padding: 10px;
+}
+
+/* Mobile support */
+@media (max-width: 1024px) {
+    .role-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .role-container {
+        grid-template-columns: 1fr;
+    }
+
+    .role-tab {
+        width: 90%;
+    }
+}
+</style>
+
+<script>
+// Toggle dropdowns on click (mobile)
+document.querySelectorAll('.role-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+        tab.classList.toggle('open');
+    });
+});
+</script>
+
+</body>
+</html>
